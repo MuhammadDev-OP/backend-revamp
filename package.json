@@ -2,14 +2,18 @@
   "name": "backend-revamp",
   "version": "1.0.0",
   "type": "module",
-  "description": "",
+  "description": "Backend Series",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon src/index.js"
   },
   "keywords": [
     "backend"
   ],
   "author": "muhammad-dev",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^3.1.4",
+    "prettier": "^3.3.2"
+  }
 }
