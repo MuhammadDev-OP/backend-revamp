@@ -5,20 +5,21 @@ import { uploadOnCloudinary } from "../utils/cloudinary.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 
 const registerUser = asyncHandler(async (req, res) => {
-  const { fullname, email, username, password } = req.body;
-  console.log("email: ", email);
+  console.log("Register user route hit");
+  const { fullName, email, username, password } = req.body;
+  console.log("Request body:", req.body);
 
   // if (fullname === "") {
   //   throw new ApiError(400, "Fullname is required");
   // }
 
   if (
-    [fullname, email, username, password].some((field) => field?.trim() === "")
+    [fullName, email, username, password].some((field) => field?.trim() === "")
   ) {
     throw new ApiError(400, "All Feilds are compulsory");
   }
 
-  const existedUser = User.findOne({
+  const existedUser = await User.findOne({
     $or: [{ username }, { email }],
   });
 
@@ -41,7 +42,7 @@ const registerUser = asyncHandler(async (req, res) => {
   }
 
   const user = await User.create({
-    fullname,
+    fullName,
     avatar: avatar.url || "",
     coverImage: coverImage?.url || "",
     email,
