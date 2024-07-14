@@ -93,10 +93,12 @@ const registerUser = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, createdUser, "User registered Successfully"));
 });
 
+//Login USER
+
 const loginUser = asyncHandler(async (req, res) => {
   const { email, username, password } = req.body;
 
-  if ((!username, email)) {
+  if (!(username || email)) {
     throw new ApiError(400, "usernmame or email is required");
   }
 
@@ -107,6 +109,7 @@ const loginUser = asyncHandler(async (req, res) => {
   if (!user) {
     throw new ApiError(404, "User does not exist ");
   }
+  console.log();
 
   const isPasswordValid = await user.isPasswordCorrect(password);
 
